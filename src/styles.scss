@@ -1,3 +1,16 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+@font-face {
+    font-family: lato;
+    src: url('assets/font/TenorSans-Regular.ttf') format("opentype");
+}
+
+* {
+    font-family: 'TenorSans', sans-serif;
+}
+
+html {
+    font-size: 16px;
+}
