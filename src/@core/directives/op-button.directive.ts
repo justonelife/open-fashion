@@ -1,4 +1,4 @@
-import { Directive, HostBinding, Input, inject } from '@angular/core';
+import { AfterViewInit, Directive, ElementRef, HostBinding, Input, Renderer2, inject } from '@angular/core';
 import { ButtonIconPosition, ButtonSize, ButtonStatus } from '../consts/op-button.const';
 import { StatusService } from '../services/status-service.service';
 
@@ -7,13 +7,16 @@ import { StatusService } from '../services/status-service.service';
   standalone: true,
   providers: [StatusService],
   host: {
-    'class': 'uppercase'
+    'class': 'uppercase flex items-center justify-center'
   }
 })
-export class OpButtonDirective {
-  readonly statusService = inject(StatusService);
+export class OpButtonDirective implements AfterViewInit {
+  readonly #statusService = inject(StatusService);
+  readonly #renderer = inject(Renderer2);
+  readonly #elementRef = inject(ElementRef);
 
   @Input() iconPos: ButtonIconPosition = 'left';
+  @Input() icon?: string;
   @Input() status: ButtonStatus = 'primary';
   @Input() size: ButtonSize = 'small';
 
@@ -26,8 +29,45 @@ export class OpButtonDirective {
   @HostBinding('class')
   get classes(): string[] {
     return [
-      ...this.statusService.getButtonClassByStatus(this.status),
+      ...this.#statusService.getButtonClassByStatus(this.status),
       ...this.SIZE_TO_CLASS[this.size]
     ];
   } 
+
+  ngAfterViewInit(): void {
+    this.#createIcon();
+  }
+
+  #createIcon(): void {
+    if (!this.icon) return;
+    const span = this.#renderer.createElement('span');
+    this.#addClassToElement(span, ['material-symbols-outlined']);
+    
+
+    // GAP BY SIZE
+    if (this.size === 'small') {
+      this.#addClassToElement(this.#elementRef.nativeElement, ['gap-2']);
+    } else if (this.size === 'medium') {
+      this.#addClassToElement(this.#elementRef.nativeElement, ['gap-4']);
+    } else if (this.size === 'large') {
+      this.#addClassToElement(this.#elementRef.nativeElement, ['gap-6']);
+    }
+
+    // POSITION BY ICON POS
+    if (this.iconPos === 'left') {
+      this.#addClassToElement(this.#elementRef.nativeElement, ['flex-row-reverse']);
+    } else {
+      this.#addClassToElement(this.#elementRef.nativeElement, ['flex-row']);
+    }
+
+    this.#renderer.setAttribute(span, 'aria-hidden', 'true');
+    this.#renderer.setProperty(span, 'innerText', this.icon);
+    this.#renderer.appendChild(this.#elementRef.nativeElement, span);
+  }
+
+  #addClassToElement(el: ElementRef, klasses: string[]): void {
+    for (const klass of klasses) {
+      this.#renderer.addClass(el, klass);
+    }
+  }
 }
