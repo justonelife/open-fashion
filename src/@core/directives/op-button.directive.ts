@@ -30,7 +30,7 @@ export class OpButtonDirective implements AfterViewInit {
   get classes(): string[] {
     return [
       ...this.#statusService.getButtonClassByStatus(this.status),
-      ...this.SIZE_TO_CLASS[this.size]
+      ...this.#getPaddings()
     ];
   } 
 
@@ -68,6 +68,15 @@ export class OpButtonDirective implements AfterViewInit {
   #addClassToElement(el: ElementRef, klasses: string[]): void {
     for (const klass of klasses) {
       this.#renderer.addClass(el, klass);
+    }
+  }
+
+  #getPaddings(): string[] {
+    if (!this.#elementRef.nativeElement.innerText) {
+      // Icon Only
+      return ['p-2'];
+    } else {
+      return this.SIZE_TO_CLASS[this.size];
     }
   }
 }
