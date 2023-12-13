@@ -25,6 +25,7 @@ export class OpButtonDirective implements AfterViewInit {
     medium: ['py-[12px]', 'px-[33px]'],
     large: ['py-4', 'w-full']
   };
+  #label?: string;
 
   @HostBinding('class')
   get classes(): string[] {
@@ -35,7 +36,12 @@ export class OpButtonDirective implements AfterViewInit {
   } 
 
   ngAfterViewInit(): void {
+    this.#getLabel();
     this.#createIcon();
+  }
+
+  #getLabel(): void {
+    this.#label = this.#elementRef.nativeElement.innerText;
   }
 
   #createIcon(): void {
@@ -72,7 +78,7 @@ export class OpButtonDirective implements AfterViewInit {
   }
 
   #getPaddings(): string[] {
-    if (!this.#elementRef.nativeElement.innerText && this.icon) {
+    if (!this.#label && this.icon) {
       // Icon Only
       return ['p-2'];
     } else {
