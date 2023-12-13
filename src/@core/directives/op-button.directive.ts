@@ -72,7 +72,7 @@ export class OpButtonDirective implements AfterViewInit {
   }
 
   #getPaddings(): string[] {
-    if (!this.#elementRef.nativeElement.innerText) {
+    if (!this.#elementRef.nativeElement.innerText && this.icon) {
       // Icon Only
       return ['p-2'];
     } else {
