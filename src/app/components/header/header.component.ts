@@ -3,7 +3,7 @@ import { OpButtonDirective } from '../../../@core/directives/op-button.directive
 import { RouterLink } from '@angular/router';
 
 @Component({
-  selector: 'app-header',
+  selector: 'op-header',
   standalone: true,
   imports: [
     OpButtonDirective,
