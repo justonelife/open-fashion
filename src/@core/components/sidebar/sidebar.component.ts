@@ -1,6 +1,7 @@
 import { animate, animation, style, transition, trigger, useAnimation } from '@angular/animations';
 import { NgClass, NgIf } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 
 const showAnimation = animation([style({ transform: '{{ transform }}' }), animate('{{ transition }}')]);
 const hideAnimation = animation([animate('{{ transition }}'), style({ transform: '{{ transform }}' })]);
@@ -53,7 +54,14 @@ export class SidebarComponent {
     }
   }
 
-  @Input() fullscreen: boolean = false;
+  @Input() get fullscreen(): boolean {
+    return this.#fullscreen;
+  }
+  set fullscreen(value: BooleanInput) {
+    this.#fullscreen = coerceBooleanProperty(value);
+  }
+  #fullscreen: boolean = false;
+
 
   transform: string = 'translate3d(-100%, 0px, 0px)';
   transition: string = '150ms cubic-bezier(0, 0, 0.2, 1)';

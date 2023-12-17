@@ -1,5 +1,6 @@
 <op-sidebar *ngIf="layoutService"
-    [visible]="(layoutService.getToggleMenu() | async) || false">
+    [visible]="(layoutService.getToggleMenu() | async) || false"
+    fullscreen>
     <div class="w-full h-full bg-red-400">
         <button opButton
             icon="close"
