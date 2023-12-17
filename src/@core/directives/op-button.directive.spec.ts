@@ -58,7 +58,7 @@ describe('OpButtonDirective', () => {
 
     fixture.detectChanges();
     expect(buttonEl.nativeElement.classList).toContain('bg-black');
-    expect(buttonEl.nativeElement.classList).toContain('text-white-900');
+    expect(buttonEl.nativeElement.classList).toContain('text-op-white');
     expect(buttonEl.nativeElement.classList).toContain('py-2');
     expect(buttonEl.nativeElement.classList).toContain('px-[30px]');
   });
