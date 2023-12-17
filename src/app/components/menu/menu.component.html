@@ -1,12 +1,14 @@
 <op-sidebar *ngIf="layoutService"
     [visible]="(layoutService.getToggleMenu() | async) || false"
     fullscreen>
-    <div class="w-full h-full bg-red-400">
-        <button opButton
-            icon="close"
-            status="secondary"
-            type="button"
-            (click)="layoutService.setToggleMenu()">
-        </button>
+    <div class="w-full h-full bg-white py-[10px]">
+        <div class="px-4">
+            <button opButton
+                icon="close"
+                status="secondary"
+                type="button"
+                (click)="layoutService.setToggleMenu()">
+            </button>
+        </div>
     </div>
 </op-sidebar>
