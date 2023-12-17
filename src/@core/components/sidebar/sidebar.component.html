@@ -1,0 +1,13 @@
+<div *ngIf="visible"
+    [@panelState]="{ value: 'visible', params: { transform, transition } }"
+    [ngClass]="{
+        'fixed': true,
+        'left-0': position !== 'right',
+        'right-0': position === 'right',
+        'top-0': position !== 'bottom',
+        'bottom-0': position === 'bottom',
+        'h-screen': position === 'left' || position === 'right' || fullscreen,
+        'w-screen': position === 'top' || position === 'bottom' || fullscreen,
+    }">
+    <ng-content></ng-content>
+</div>
