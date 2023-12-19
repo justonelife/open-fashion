@@ -1,7 +1,9 @@
 <div class="flex justify-between items-center h-[60px] pl-4 pr-6">
     <button opButton
         icon="menu"
-        status="secondary">
+        status="secondary"
+        type="button"
+        (click)="toggleMenu()">
     </button>
     <a routerLink="">
         <img src="/assets/logo/logo-light-theme.svg" alt="logo-light-theme">
@@ -9,11 +11,13 @@
     <div class="flex">
         <button opButton
             icon="search"
-            status="secondary">
+            status="secondary"
+            type="button">
         </button>
         <button opButton
             icon="shopping_bag"
-            status="secondary">
+            status="secondary"
+            type="button">
         </button>
     </div>
 </div>

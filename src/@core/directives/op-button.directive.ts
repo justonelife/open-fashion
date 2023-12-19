@@ -7,7 +7,7 @@ import { StatusService } from '../services/status-service.service';
   standalone: true,
   providers: [StatusService],
   host: {
-    'class': 'uppercase flex items-center justify-center'
+    class: 'uppercase flex items-center justify-center'
   }
 })
 export class OpButtonDirective implements AfterViewInit {
