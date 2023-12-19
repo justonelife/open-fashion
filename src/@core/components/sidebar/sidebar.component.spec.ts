@@ -20,4 +20,16 @@ describe('SidebarComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it(`should have a default value of 'left' for position`, () => {
+    expect(component.position).toEqual('left');
+  });
+
+  it('should have a default value of false for fullscreen', () => {
+    expect(component.fullscreen).toEqual(false);
+  });
+
+  it('should have a default value of false for visible', () => {
+    expect(component.visible).toEqual(false);
+  });
 });
